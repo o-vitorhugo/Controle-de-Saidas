@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/style.css">
+    <script src="../assets/scripts/saida-consultar.js" defer></script>
+    <link rel="icon" href="../assets/images/saida.svg">
+
+    <!--Fontes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <title>Consulta de Saída | Controle de Saídas</title>
+</head>
+
+<body>
+    <header class="sidebar">
+        <div>
+            <h2>Controle de Saídas</h2>
+            <hr><br>
+
+            <div class="navMenu">
+                <p>Menu</p>
+                <a href="../aluno/aluno-painel.html">
+                    <div class="navOpt">
+                        <img src="../assets/images/aluno.svg">
+                        Alunos
+                    </div>
+                </a><br>
+
+                <a href="./saida-painel.html">
+                    <div class="currentOpt">
+                        <img src="../assets/images/saida.svg">
+                        Saídas
+                    </div>
+                </a><br>
+
+                <a href="../professor/professor-painel.html">
+                    <div class="navOpt">
+                        <img src="../assets/images/professor.svg">
+                        Professores
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <a href="../index.html" class="btn-sair">Sair</a>
+    </header>
+
+    <main class="painel-main">
+        <form class="form-consulta">
+            <div>
+                <h1>Consulta de Saída</h1>
+                <p>Digite o código da saída para obter informações.</p>
+                
+                <label for="codSaida">Código da Saída</label><br>
+                <input type="text" id="codSaida"><br><br>
+                
+                <button id="consultar" class="btn-form">Consultar</button>
+            </div>
+        </form>
+
+        <div id="container" class="card-container-consulta"></div>
+    </main>
+</body>
+
+</html>
