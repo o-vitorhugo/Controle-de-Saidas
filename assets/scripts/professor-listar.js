@@ -1,5 +1,4 @@
 let container = document.getElementById("container");
-let res = document.getElementById("res");
 
 let professores = [];
 

@@ -6,8 +6,8 @@ cadastrar.addEventListener('click', (e) => {
 
     const now = new Date(); // Pega a data e hora atual do sistema
     let dataSolicitacao = now.toISOString().split('T')[0]; // Separa data e hora e mantém somente a data
-    let horaSaida = null;
-    let horaRetorno = null;
+    let horaSaida = "00:00";
+    let horaRetorno = "00:00";
 
     let motivo = document.getElementById('motivo').value;
     let localDestino = document.getElementById('localDestino').value;
@@ -38,6 +38,7 @@ cadastrar.addEventListener('click', (e) => {
     console.log("Enviando: ", JSON.stringify(saida));
 
     res.innerHTML = ``;
+    res.style.display = `block`;
     res.style.backgroundColor = '#f6f6f6';
     res.style.borderLeft = '4px solid #667eea';
     res.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';

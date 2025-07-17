@@ -3,12 +3,17 @@ let consultar = document.getElementById('consultar');
 
 let nomeAluno = document.getElementById('nomeAluno');
 
+// Variáveis globais para guardar os códigos atuais
+let codAlunoAtual = null;
+let codProfessorAtual = null;
+
 consultar.addEventListener('click', (e) => {
     e.preventDefault();
 
     let codSaida = document.getElementById('codSaida').value;
 
     res_consulta.innerHTML = ``;
+    res_consulta.style.display = `block`;
     res_consulta.style.backgroundColor = '#f6f6f6';
     res_consulta.style.borderLeft = '4px solid #667eea';
     res_consulta.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
@@ -24,6 +29,12 @@ consultar.addEventListener('click', (e) => {
             res_consulta.innerHTML += `<p>Saída do aluno <strong> ${saida.nomeAluno} </strong> encontrada</p>`;
 
             console.log(saida);
+
+            // Guarda os códigos atuais
+            codAlunoAtual = saida.aluno.codAluno;
+            codProfessorAtual = saida.professor.codProfessor;
+
+            let status = document.getElementById('status');
 
             dataSolicitacao.value = saida.dataSolicitacao;
             horaSaida.value = saida.horaSaida;
@@ -58,12 +69,32 @@ atualizar.addEventListener('click', (e) => {
     let status = document.getElementById('status').value;
 
     let alunoSelect = document.getElementById('aluno_cod');
-    let aluno_cod = Number(alunoSelect.value);
-    let nomeAluno = alunoSelect.options[alunoSelect.selectedIndex].textContent;
+    let aluno_cod = alunoSelect.value;
 
     let professorSelect = document.getElementById('professor_cod');
-    let professor_cod = Number(professorSelect.value);
-    let nomeProfessor = professorSelect.options[professorSelect.selectedIndex].textContent;
+    let professor_cod = professorSelect.value;
+
+    // Decide qual aluno usar (o atual ou o selecionado)
+    let aluno_cod_final;
+    let nomeAluno_final;
+    if (aluno_cod === "" || aluno_cod === null) {
+        aluno_cod_final = codAlunoAtual;
+        nomeAluno_final = nomeAluno.value;
+    } else {
+        aluno_cod_final = Number(aluno_cod);
+        nomeAluno_final = alunoSelect.options[alunoSelect.selectedIndex].textContent;
+    }
+
+    // Decide qual professor usar (o atual ou o selecionado)
+    let professor_cod_final;
+    let nomeProfessor_final;
+    if (professor_cod === "" || professor_cod === null) {
+        professor_cod_final = codProfessorAtual;
+        nomeProfessor_final = nomeProfessor.value;
+    } else {
+        professor_cod_final = Number(professor_cod);
+        nomeProfessor_final = professorSelect.options[professorSelect.selectedIndex].textContent;
+    }
 
     const saida = {
         dataSolicitacao: dataSolicitacao,
@@ -72,15 +103,16 @@ atualizar.addEventListener('click', (e) => {
         motivo: motivo,
         localDestino: localDestino,
         status: status,
-        nomeAluno: nomeAluno,
-        nomeProfessor: nomeProfessor,
-        aluno_cod: aluno_cod,
-        professor_cod: professor_cod
+        nomeAluno: nomeAluno_final,
+        nomeProfessor: nomeProfessor_final,
+        aluno_cod: aluno_cod_final,
+        professor_cod: professor_cod_final
     };
 
     console.log("Enviando: ", JSON.stringify(saida));
 
     res.innerHTML = ``;
+    res.style.display = `block`;
     res.style.backgroundColor = '#f6f6f6';
     res.style.borderLeft = '4px solid #667eea';
     res.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';

@@ -21,6 +21,7 @@ cadastrar.addEventListener('click', (e) => {
     console.log("Enviando: ", JSON.stringify(professor));
 
     res.innerHTML = ``;
+    res.style.display = `block`;
     res.style.backgroundColor = '#f6f6f6';
     res.style.borderLeft = '4px solid #667eea';
     res.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';

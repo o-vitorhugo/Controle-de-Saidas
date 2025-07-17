@@ -356,7 +356,7 @@ a {
 }
 
 .card-container-consulta {
-    max-width: 1000px;
+    max-width: 1100px;
 }
 
 .card {
@@ -378,7 +378,6 @@ a {
     width: 90%;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .card-info-consulta {
@@ -427,6 +426,12 @@ a {
     white-space: normal;
 }
 
+.saida-h3 {
+    font-size: 16px !important;
+    width: 280px !important;
+    margin: 0 20px !important;
+}
+
 .saida-p {
     width: 100px !important;
     margin: 0 20px !important;
@@ -469,6 +474,7 @@ a {
 
 #res,
 #res_consulta {
+    display: none;
     color: #1e1e1e;
     font-size: 16px;
     padding: 20px;

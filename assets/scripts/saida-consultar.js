@@ -22,9 +22,11 @@ consultar.addEventListener('click', (e) => {
             card.innerHTML = `
                 <div class="card-info-consulta">
                     <h3>${saida.nomeAluno}</h3>
-                    <p class="saida-p">${saida.dataSolicitacao}</p>
                     <p class="saida-p">${saida.motivo}</p>
                     <p class="saida-p">${saida.localDestino}</p>
+                    <p class="saida-p">${saida.dataSolicitacao}</p>
+                    <p class="saida-p">${saida.horaSaida}</p>
+                    <p class="saida-p">${saida.horaRetorno}</p>
                     <p class="saida-p">${saida.status}</p>
                 </div>
             `;

@@ -37,7 +37,7 @@
                         <img src="../assets/images/aluno.svg">
                         Alunos
                     </div>
-                </a> 
+                </a>
 
                 <a href="../professor/professor-painel.html">
                     <div class="navOpt">
@@ -80,26 +80,30 @@
 
         <form class="form-cadastro">
             <div>
-                <label for="motivo">Motivo</label><br>
-                <input type="text" id="motivo" required><br>
-
-                <label for="localDestino">Local de Destino</label><br>
-                <input type="text" id="localDestino" required><br>
-
-                <label for="aluno_cod">Aluno</label><br>
-                <select id="aluno_cod" required>
+                <label for="nomeAluno">Aluno Atual</label><br>
+                <input type="text" id="nomeAluno" readonly>
+                <label for="aluno_cod">Selecione o Novo Aluno</label><br>
+                <select id="aluno_cod">
                     <option value="">Aluno</option>
 
                 </select><br>
 
-                <label for="professor_cod">Professor</label><br>
-                <select id="professor_cod" required>
+                <label for="nomeProfessor">Professor Atual</label><br>
+                <input type="text" id="nomeProfessor" readonly>
+                <label for="professor_cod">Selecione o Novo Professor</label><br>
+                <select id="professor_cod">
                     <option value="">Professor</option>
 
                 </select><br>
-            </div>
 
+                <label for="motivo">Motivo</label><br>
+                <input type="text" id="motivo" required><br>
+            </div>
+            
             <div>
+                <label for="localDestino">Local de Destino</label><br>
+                <input type="text" id="localDestino" required><br>
+    
                 <label for="dataSolicitacao">Data de Solicitação</label><br>
                 <input type="date" id="dataSolicitacao" required><br>
 

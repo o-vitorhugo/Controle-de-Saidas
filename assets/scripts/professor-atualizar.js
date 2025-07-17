@@ -10,6 +10,7 @@ consultar.addEventListener('click', (e) => {
     let codProfessor = document.getElementById('codProfessor').value;
 
     res_consulta.innerHTML = ``;
+    res_consulta.style.display = `block`;
     res_consulta.style.backgroundColor = '#f6f6f6';
     res_consulta.style.borderLeft = '4px solid #667eea';
     res_consulta.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
@@ -63,6 +64,7 @@ atualizar.addEventListener('click', (e) => {
     console.log("Enviando: ", JSON.stringify(professor));
 
     res.innerHTML = ``;
+    res.style.display = `block`;
     res.style.backgroundColor = '#f6f6f6';
     res.style.borderLeft = '4px solid #667eea';
     res.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';

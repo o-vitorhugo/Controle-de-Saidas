@@ -1,5 +1,4 @@
 let container = document.getElementById("container");
-let res = document.getElementById("res");
 
 let saidas = [];
 
@@ -26,10 +25,12 @@ fetch("http://localhost:8081/saida")
     
             card.innerHTML = `
                 <div class="card-info">
-                    <h3>${saida.nomeAluno}</h3>
-                    <p class="saida-p">${saida.dataSolicitacao}</p>
+                    <h3 class="saida-h3">${saida.nomeAluno}</h3>
                     <p class="saida-p">${saida.motivo}</p>
                     <p class="saida-p">${saida.localDestino}</p>
+                    <p class="saida-p">${saida.dataSolicitacao}</p>
+                    <p class="saida-p">${saida.horaSaida}</p>
+                    <p class="saida-p">${saida.horaRetorno}</p>
                     <p class="saida-p">${saida.status}</p>
                 </div>
                 <div class="card-actions">

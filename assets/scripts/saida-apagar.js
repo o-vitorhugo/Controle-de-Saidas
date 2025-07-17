@@ -7,6 +7,7 @@ apagar.addEventListener('click', (e) => {
     let codSaida = document.getElementById('codSaida').value;
 
     res.innerHTML = ``;
+    res.style.display = `block`;
     res.style.backgroundColor = '#f6f6f6';
     res.style.borderLeft = '4px solid #667eea';
     res.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
@@ -32,11 +33,8 @@ const saidaJSON = localStorage.getItem('saidaParaApagar');
 
 if (saidaJSON) {
     const saida = JSON.parse(saidaJSON);
-
-    // Preencher o input com o id da saída
     document.getElementById('codSaida').value = saida.codSaida || ''; 
 } else {
-    // Limpar o input se não houver dados
     document.getElementById('codSaida').value = '';
     console.error("Nenhum saida selecionado.");
 }

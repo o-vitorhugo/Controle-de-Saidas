@@ -1,5 +1,4 @@
 let container = document.getElementById("container");
-let res = document.getElementById("res");
 
 let saidas = [];
 
@@ -20,7 +19,7 @@ fetch("http://localhost:8081/saida")
 
         saidas = data;
 
-        data.forEach((saida, index) => {
+        data.forEach((saida) => {
             if (saida.status === "Finalizada" || saida.status === "Rejeitada") {
                 return
             }
@@ -49,10 +48,12 @@ fetch("http://localhost:8081/saida")
 
             card.innerHTML = `
                 <div class="card-info">
-                    <h3>${saida.nomeAluno}</h3>
-                    <p class="saida-p">${saida.dataSolicitacao}</p>
+                    <h3 class="saida-h3">${saida.nomeAluno}</h3>
                     <p class="saida-p">${saida.motivo}</p>
                     <p class="saida-p">${saida.localDestino}</p>
+                    <p class="saida-p">${saida.dataSolicitacao}</p>
+                    <p class="saida-p hora-saida">${saida.horaSaida}</p>
+                    <p class="saida-p">${saida.nomeProfessor}</p>
                     <p class="saida-p">${saida.status}</p>
                 </div>
                 <div class="card-actions">
@@ -61,7 +62,7 @@ fetch("http://localhost:8081/saida")
             `;
 
             container.appendChild(card);
-            saida.cardElement = card; // Salva referência DOM diretamente no objeto
+            saida.cardElement = card;
         });
     })
     .catch(error => {
@@ -69,8 +70,12 @@ fetch("http://localhost:8081/saida")
         container.innerHTML = `<p style="color:red">Erro ao carregar os alunos.</p>`;
     });
 
-function autorizarSaida(index) {
-    const saida = saidas[index];
+function getSaidaPorId(codSaida) {
+    return saidas.find(s => s.codSaida === codSaida);
+}
+
+function autorizarSaida(codSaida) {
+    const saida = getSaidaPorId(codSaida);
 
     fetch(`http://localhost:8081/saida/status/${saida.codSaida}`, {
         method: "PUT",
@@ -84,6 +89,16 @@ function autorizarSaida(index) {
             return res.text()
         })
         .then(() => {
+            const horaAtual = new Date().toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+
+            // Atualiza o texto da horaSaida no card
+            const horaSaidaEl = saida.cardElement.querySelector(".hora-saida");
+            if (horaSaidaEl) horaSaidaEl.textContent = horaAtual;
+
             saida.status = "Autorizada";
 
             // Atualiza status no card
@@ -92,7 +107,7 @@ function autorizarSaida(index) {
 
             // Atualiza botões
             saida.cardElement.querySelector(".card-actions").innerHTML = `
-                <button class="btn-icon" onclick="finalizarSaida(${index})">
+                <button class="btn-icon" onclick="finalizarSaida(${codSaida})">
                     <img src="../assets/images/saida.svg">
                 </button>
             `;
@@ -100,8 +115,8 @@ function autorizarSaida(index) {
         .catch(err => alert(err));
 }
 
-function rejeitarSaida(index) {
-    const saida = saidas[index];
+function rejeitarSaida(codSaida) {
+    const saida = getSaidaPorId(codSaida);
 
     fetch(`http://localhost:8081/saida/status/${saida.codSaida}`, {
         method: "PUT",
@@ -115,14 +130,14 @@ function rejeitarSaida(index) {
             return res.text()
         })
         .then(() => {
-            saidas.splice(index, 1); // Remove a saida do array
+            saidas = saidas.filter(s => s.codSaida !== codSaida); // Remove a saída
             saida.cardElement.remove(); // Remove o card do container
         })
         .catch(err => alert(err));
 }
 
-function finalizarSaida(index) {
-    const saida = saidas[index];
+function finalizarSaida(codSaida) {
+    const saida = getSaidaPorId(codSaida);
 
     fetch(`http://localhost:8081/saida/status/${saida.codSaida}`, {
         method: "PUT",
@@ -136,7 +151,7 @@ function finalizarSaida(index) {
             return res.text()
         })
         .then(() => {
-            saidas.splice(index, 1);
+            saidas = saidas.filter(s => s.codSaida !== codSaida);
             saida.cardElement.remove();
         })
         .catch(err => alert(err));
